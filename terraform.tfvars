@@ -1,0 +1,11 @@
+cluster_name        = "aks-demo1"
+kubernetes_version  = "1.28.5"
+location            = "EastUs2"
+node_resource_group = "practice"
+system_node_count   = "2"
+network_plugin      = "azure"
+docker_bridge_cidr  = "172.17.0.1/16"
+service_cidr        = "10.1.0.0/16"
+dns_service_ip      = "10.1.0.10"
+resource_group_name = "practice"
+
