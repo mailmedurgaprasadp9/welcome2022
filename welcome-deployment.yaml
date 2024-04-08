@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: welcome-deployment
+  labels:
+    app: welcome
+spec:
+  replicas: 3   # Set the number of replicas as per your requirement
+  selector:
+    matchLabels:
+      app: welcome
+  template:
+    metadata:
+      labels:
+        app: welcome
+    spec:
+      containers:
+      - name: welcome
+        image: aksdemo99.azurecr.io/welcome:v1   # Use the image from your ACR
+        ports:
+        - containerPort: 81  # Port on which your container listens
+    spec:
+      containers:
+      - name: welcome
+        image: aksdemo99.azurecr.io/welcome:v1
+      imagePullSecrets:
+      - name: acr-auth
+    # service type loadbalancer       
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: welcome-app-svc
+spec:
+  selector:
+    app: welcome
+  ports:
+    - protocol: TCP
+      port: 81
+      targetPort: 81
+  type: LoadBalancer
+
+
